@@ -3,8 +3,9 @@ import {render} from 'react-dom';
 import {root} from 'baobab-react/higher-order';
 import tree from './state';
 import Counter from './components/Counter.jsx';
-import Message from './components/Message.jsx';
-
+import Report from './components/Report.jsx';
+import DataList from './components/DataList.jsx';
+import Streamgraph from './components/Streamgraph.jsx';
 
 import '!style!css!less!./../assets/less/style.less';
 
@@ -13,7 +14,10 @@ class App extends Component {
     return (
       <div className="container">
         <Counter/>
-        <Message/>
+        <Report/>
+        <Streamgraph/>
+
+        <DataList/>
       </div>
     )
   }

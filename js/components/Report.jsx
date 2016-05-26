@@ -4,9 +4,9 @@ import {branch} from 'baobab-react/higher-order';
 class Message extends Component {
   render(){
     return (
-      <h1>hello {this.props.what}</h1>
+      <h1>{this.props.what}</h1>
     )
   }
 }
 
-export default branch(Message,{cursors:{what:'what'}})
+export default branch(Message,{cursors:{what:['data','reccount']}})
