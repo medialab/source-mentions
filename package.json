@@ -5,11 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "kotatsu serve -c webpack.config.js --presets es2015,react,react-hmre ./main.jsx"
+    "start": "kotatsu serve -c webpack.config.js --presets es2015,react,react-hmre ./js/main.jsx",
+    "update": "wget https://heurist.octopuce.fr/h4/viewers/smarty/showReps.php?db=liberty_and_security&w=a&q=%0Atype%3A1%20field%3A6%3Amentioned%20or%20t%3A10%20or%20t%3A20&h4=1&publish=1&debug=0&template=JSON-generic.tpl"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "baobab": "^2.3.0",
+    "baobab-react": "^1.0.1",
     "bootstrap": "^3.3.6",
     "react": "^15.1.0",
     "react-dom": "^15.1.0"
@@ -18,6 +21,7 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-react-hmre": "^1.1.1",
     "css-loader": "^0.23.1",
+    "file-loader": "^0.8.5",
     "kotatsu": "^0.13.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
