@@ -14,6 +14,7 @@
     "baobab": "^2.3.0",
     "baobab-react": "^1.0.1",
     "bootstrap": "^3.3.6",
+    "d3-scale": "^0.7.2",
     "lodash": "^4.13.1",
     "react": "^15.1.0",
     "react-dom": "^15.1.0"

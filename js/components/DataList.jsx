@@ -15,9 +15,9 @@ class DataList extends Component {
     }
 
     return (
-      <div>{this.props.peoples.map(renderItem)}</div>
+      <div>{this.props.events.map(renderItem)}</div>
     )
   }
 }
 
-export default branch(DataList,{cursors:{peoples:'peoples'}})
+export default branch(DataList,{cursors:{events:'events'}})
