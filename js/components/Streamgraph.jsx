@@ -1,41 +1,44 @@
 import React, {Component} from 'react';
 import {branch} from 'baobab-react/higher-order';
-import {scaleLinear} from 'd3-scale';
+import d3 from 'd3';
 import _ from 'lodash';
 
 class Streamgraph extends Component {
   render(){
 
-    const events = this.props.events;
+    const color = d3.scale.category10();
 
-    console.log(events);
+    var stackerfun = d3.layout.stack()
+    .offset("silhouette")
+    .values(function(d) { return d.values; });
 
-    const minYear = _.minBy(events, 'startDate').startDate,
-          maxYear = _.maxBy(events, 'startDate').startDate
+    const area = d3.svg.area()
+      .x(d => d.x * 15 )
+      .y0(d => d.y0 * 20 )
+      .y1(d => (d.y0 + d.y) * 20 );
 
-    console.log(minYear, maxYear, _.minBy(events, 'startDate'));
+    function renderPath(d, i){
+      const path = area(d.values);
 
+      return <path
+        id={'fqs'+i}
+        fill={color(i)}
 
-    const x = scaleLinear()
-      .domain([minYear, maxYear])
-      .range([0, 1000]);
-
-    function renderItem(d,i) {
-      return (
-        <circle
-          key={d.recId}
-          className="event"
-          cx={10 + x(d.startDate)}
-          cy={10 + (i*6)}
-          r={2} />
-      )
+        stroke="white"
+        d={path}
+        className="storyPath" />
     }
+
+    // console.log(this.props.layers);
+    const stacked = stackerfun(this.props.layers)
+
     return (
       <svg width="100%" height="500" className="line-chart">
-        {this.props.events.map(renderItem)}
-      </svg>)
+        {stacked.map(renderPath)}
+      </svg>
+    )
   }
 }
 
-export default branch(Streamgraph,{cursors:{events:'events'}})
+export default branch(Streamgraph,{cursors:{layers:'layers'}})
 
