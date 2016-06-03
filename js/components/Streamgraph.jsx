@@ -7,38 +7,52 @@ class Streamgraph extends Component {
   render(){
 
     const color = d3.scale.category10();
+    const offsetx = 12, offsety = 100;
+    const width = 1000, height = 500;
 
-    var stackerfun = d3.layout.stack()
-    .offset("silhouette")
-    .values(function(d) { return d.values; });
 
-    const area = d3.svg.area()
-      .x(d => d.x * 15 )
-      .y0(d => d.y0 * 20 )
-      .y1(d => (d.y0 + d.y) * 20 );
+    function renderLines(d,i){
 
-    function renderPath(d, i){
-      const path = area(d.values);
+      return <line
+          x1={i * offsetx}
+          y1={0}
+          x2={i * offsetx}
+          y2={4 * offsety}
+          className="eventLine"
+        ><title>{d.shortName}</title></line>
 
-      return <path
-        id={'fqs'+i}
-        fill={color(i)}
-
-        stroke="white"
-        d={path}
-        className="storyPath" />
     }
 
-    // console.log(this.props.layers);
-    const stacked = stackerfun(this.props.layers)
+
+    const stack = d3.layout.stack()
+      .values(function(d) { return d.values; });
+
+    const area = d3.svg.area()
+      .x(function(d)  { return offsetx * (d.x); })
+      .y0(function(d) { return offsety * (d.y0); })
+      .y1(function(d) { return offsety * (d.y0 + d.y); });
+
+    function renderPath(d, i){
+      return <path
+        id={'fqs'+i}
+        fill={color((i+5)%10)}
+        d={area(d.values)}
+        className="storyPath" >
+          <title>{d.name}</title>
+        </path>
+    }
+
+    const stacked = stack(_.cloneDeep(this.props.layers));
+
 
     return (
-      <svg width="100%" height="500" className="line-chart">
-        {stacked.map(renderPath)}
+      <svg width={width} height={height} className="line-chart">
+        <g>{this.props.events.map(renderLines)}</g>
+        <g>{stacked.map(renderPath)}</g>
       </svg>
     )
   }
 }
 
-export default branch(Streamgraph,{cursors:{layers:'layers'}})
+export default branch(Streamgraph,{cursors:{layers:'layers', events:'events'}})
 

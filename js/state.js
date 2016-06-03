@@ -42,10 +42,7 @@ function getLayers(d) {
         })
 
         const weight = _.isUndefined(rel) ? 0 : 1
-        // const weight = _.random(0,3);<
-
-
-        return { x: i, y: weight, y0:5, node:event }
+        return { x: i, y: weight, node:event }
 
       }).value()
     }

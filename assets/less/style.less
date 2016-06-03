@@ -1,7 +1,7 @@
 @import './../../node_modules/bootstrap/less/bootstrap.less';
 @color: royalblue;
 
-.row {
+.record {
   border-bottom: @color solid 1px;
 }
 
@@ -9,6 +9,13 @@
 
   stroke-width:1px;
   stroke:@color;
-    fill: transparent;
+  fill: transparent;
 
+}
+
+.eventLine {
+
+  stroke-width:10px;
+  stroke: darken(white, 10%);
+  stroke-linecap:round;
 }
