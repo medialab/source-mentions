@@ -25,7 +25,7 @@ class DataList extends Component {
     }
 
     return (
-      <div className="container">
+      <div>
         <div className="row">
           <h1>actors</h1>
           {this.props.actors.map(renderActors)}
@@ -39,4 +39,4 @@ class DataList extends Component {
   }
 }
 
-export default branch(DataList,{cursors:{events:'events',actors:'actors'}})
+export default branch(DataList,{cursors:{events:'events',actors:'actors',linkBySource:'linkBySource'}})

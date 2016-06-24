@@ -6,18 +6,24 @@ import Counter from './components/Counter.jsx';
 import Report from './components/Report.jsx';
 import DataList from './components/DataList.jsx';
 import Streamgraph from './components/Streamgraph.jsx';
+import Matrice from './components/Matrice.jsx';
+import Controls from './components/Controls.jsx';
 
 import '!style!css!less!./../assets/less/style.less';
 
 class App extends Component {
   render(){
     return (
-      <div className="container">
-        <Counter/>
-        <Report/>
-        <Streamgraph/>
+      <div className="container-fluid">
+        <div className="col-sm-2">
+          <Controls/>
+        </div>
+        <div className="col-sm-offset-3 col-sm-9">
+          <Matrice/>
+          <Streamgraph/>
+          <DataList/>
+        </div>
 
-        <DataList/>
       </div>
     )
   }

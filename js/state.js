@@ -12,18 +12,35 @@ function dataCleaner(data){
     .filter(d => {
       return _.includes(Sutils.getAll(data, 'recId'), d.target)
           && _.includes(Sutils.getAll(data, 'recId'), d.source)
-    }).value()
+    })
+    .filter('relTypeId',5467)
+    .value()
 
-  const nodes = _(data)
+  let nodes = _(data)
     .filter(d => d.recTypeId != 1)
     .filter(d => {
       return _.includes(Sutils.getAll(links, 'source'), d.recId)
           || _.includes(Sutils.getAll(links, 'target'), d.recId)
     })
     .sortBy('startDate')
-    .value()
+    .value();
 
-  return { links: links, nodes: nodes };
+  const nodeByRecId = _.keyBy(nodes,'recId');
+  const linksFiltered = _(links).filter(link => {
+    return nodeByRecId[link.source].recTypeId == 20
+        && nodeByRecId[link.target].recTypeId == 10
+  })
+  // .uniqBy(d => {
+  //     return d.source+'-'+d.target;
+  // })
+  .value();
+
+  const nodeFiltered = _.map(nodes, node => {
+    node.inDegree  = _.filter(links,['source', node.recId]).length;
+    return node;
+  })
+
+  return { links: linksFiltered, nodes: nodeFiltered };
 
 }
 
@@ -52,22 +69,40 @@ function getLayers(d) {
 
 const tree = new Baobab({
   counter: 0,
-  what:'tou',
   graph: dataCleaner(customData.results),
+
+  minDegree:2,
+
   actors: monkey({
-    cursors: { results: ['graph', 'nodes'] },
-    get: d => filter(d.results, ['recTypeId', 10])
+    cursors: { nodes: ['graph', 'nodes'] },
+    get: d => filter(d.nodes, ['recTypeId', 10])
   }),
   events: monkey({
-    cursors: { results: ['graph', 'nodes'] },
-    get: d => filter(d.results, ['recTypeId', 20])
+    cursors: { nodes: ['graph', 'nodes'], linkBySource:['linkBySource'], minDegree:['minDegree'] },
+    get: curs => _(curs.nodes)
+      .filter(['recTypeId', 20])
+      .filter(event => {
+        return event.inDegree >= curs.minDegree;
+      })
+      .value()
   }),
   layers: monkey({
     cursors: { actors:['actors'], events:['events'], graph:['graph'] },
     get: d => getLayers(d)
+  }),
+  linkBySource: monkey({
+    cursors: { links: ['graph','links'], nodes:['graph','nodes'] },
+    get: d => _(d.links).filter(l => {
+
+      var actors = _.filter(d.nodes, ['recTypeId', 10]);
+
+      return _.includes(Sutils.getAll(actors, 'recId'), l.target)
+
+    }).groupBy('source').value()
   })
 })
 
-console.log('getlayers:', tree.get('layers'));
+// console.log('linkBySource:', tree.get('linkBySource'));
+// console.log('events:', tree.get('events'));
 
 export default tree;

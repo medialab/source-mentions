@@ -7,8 +7,8 @@ class Streamgraph extends Component {
   render(){
 
     const color = d3.scale.category10();
-    const offsetx = 12, offsety = 100;
-    const width = 1000, height = 500;
+    const width = 700, height = 250;
+    const offsetx = width/this.props.events.length, offsety = 40;
 
 
     function renderLines(d,i){
@@ -17,13 +17,11 @@ class Streamgraph extends Component {
           x1={i * offsetx}
           y1={0}
           x2={i * offsetx}
-          y2={4 * offsety}
+          y2={4 * offsety + offsety}
           className="eventLine"
         ><title>{d.shortName}</title></line>
 
     }
-
-
     const stack = d3.layout.stack()
       .values(function(d) { return d.values; });
 
@@ -43,7 +41,6 @@ class Streamgraph extends Component {
     }
 
     const stacked = stack(_.cloneDeep(this.props.layers));
-
 
     return (
       <svg width={width} height={height} className="line-chart">
