@@ -14,14 +14,16 @@ import '!style!css!less!./../assets/less/style.less';
 class App extends Component {
   render(){
     return (
-      <div className="container-fluid">
-        <div className="col-sm-2">
+      <div>
+
+        <div className="container navbar-fixed-top" >
           <Controls/>
         </div>
-        <div className="col-sm-offset-3 col-sm-9">
-          <Matrice/>
-          <Streamgraph/>
-          <DataList/>
+
+        <div id="vizContainer" className="container">
+          <div className="row matrice"><Matrice/></div>
+          <div className="row"><Streamgraph/></div>
+          <div className="row"><DataList/></div>
         </div>
 
       </div>

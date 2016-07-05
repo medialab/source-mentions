@@ -1,6 +1,8 @@
 @import './../../node_modules/bootstrap/less/bootstrap.less';
 @color: royalblue;
 
+@font-size-base:          12px;
+
 .record {
   border-bottom: @color solid 1px;
 }
@@ -34,5 +36,13 @@
 }
 
 #controls {
-  position: fixed;
+  // position: fixed;
+  height: 80px;
+  background-color: lighten(gold, 45%);
+  z-index: 1000;
+  border-radius: 5px;
+}
+
+#vizContainer {
+  margin-top:80px;
 }
