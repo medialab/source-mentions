@@ -6,26 +6,34 @@ import * as actions from './../actions.js';
 
 class Controls extends Component {
 
-  updateInput(e) { tree.set('minDegree',e.target.value) }
+  updateInputMention(e) { tree.set('minMentions',e.target.value) }
+  updateInputMentionBy(e) { tree.set('minMentionsBy',e.target.value) }
 
   render(){
     return (<div id="controls">
 
       <h4>Schenghen mentions</h4>
       <hr/>
-      <p>Events mentioned at least {this.props.minDegree} times</p>
+      <p>Events mentioned at least {this.props.minMentions} times</p>
       <ReactSliderNativeBootstrap
-          value={this.props.minDegree}
-          handleChange={this.updateInput}
+          value={this.props.minMentions}
+          handleChange={this.updateInputMention}
           step={1}
           max={15}
           min={1}
           disabled="disabled" />
 
       <hr/>
-      <p>Events mentioned at least by {this.props.minDegree} actors</p>
+      <p>Events mentioned at least by {this.props.minMentionsBy} actors</p>
+      <ReactSliderNativeBootstrap
+          value={this.props.minMentionsBy}
+          handleChange={this.updateInputMentionBy}
+          step={1}
+          max={5}
+          min={1}
+          disabled="disabled" />
 
     </div>)
   }
 }
-export default branch(Controls,{ cursors:{minDegree:'minDegree'}})
+export default branch(Controls,{ cursors:{minMentions:'minMentions',minMentionsBy:'minMentionsBy'}})

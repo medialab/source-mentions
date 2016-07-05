@@ -14,7 +14,7 @@ function dataCleaner(data){
           && _.includes(Sutils.getAll(data, 'recId'), d.source)
     })
     .filter('relTypeId',5467)
-    .value()
+    .value();
 
   let nodes = _(data)
     .filter(d => d.recTypeId != 1)
@@ -30,13 +30,16 @@ function dataCleaner(data){
     return nodeByRecId[link.source].recTypeId == 20
         && nodeByRecId[link.target].recTypeId == 10
   })
-  // .uniqBy(d => {
-  //     return d.source+'-'+d.target;
-  // })
   .value();
 
   const nodeFiltered = _.map(nodes, node => {
-    node.inDegree  = _.filter(links,['source', node.recId]).length;
+    node.mentions  = _.filter(links,['source', node.recId]).length;
+    node.mentionsBy  = _(links)
+      .filter(['source', node.recId])
+      .uniqBy(link => {return link.target})
+      .value()
+      .length;
+
     return node;
   })
 
@@ -71,18 +74,25 @@ const tree = new Baobab({
   counter: 0,
   graph: dataCleaner(customData.results),
 
-  minDegree:2,
+  minMentions:1,
+  minMentionsBy:1,
 
   actors: monkey({
     cursors: { nodes: ['graph', 'nodes'] },
     get: d => filter(d.nodes, ['recTypeId', 10])
   }),
   events: monkey({
-    cursors: { nodes: ['graph', 'nodes'], linkBySource:['linkBySource'], minDegree:['minDegree'] },
+    cursors: {
+      nodes: ['graph', 'nodes'],
+      linkBySource:['linkBySource'],
+      minMentions:['minMentions'],
+      minMentionsBy:['minMentionsBy']
+    },
     get: curs => _(curs.nodes)
       .filter(['recTypeId', 20])
       .filter(event => {
-        return event.inDegree >= curs.minDegree;
+        // console.log(curs.minMentionsBy, event.mentionsBy)
+        return event.mentions >= curs.minMentions && event.mentionsBy >= curs.minMentionsBy;
       })
       .value()
   }),

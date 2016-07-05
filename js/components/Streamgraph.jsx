@@ -14,6 +14,7 @@ class Streamgraph extends Component {
     function renderLines(d,i){
 
       return <line
+          key={'eventLine'+i}
           x1={i * offsetx}
           y1={0}
           x2={i * offsetx}
@@ -32,7 +33,7 @@ class Streamgraph extends Component {
 
     function renderPath(d, i){
       return <path
-        id={'fqs'+i}
+        key={'fqs'+i}
         fill={color((i+5)%10)}
         d={area(d.values)}
         className="storyPath" >

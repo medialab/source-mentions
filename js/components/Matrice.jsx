@@ -30,6 +30,7 @@ class matrice extends Component {
       return (
         <g>
           <line
+            key={'event'+event.recId}
             className="eventLine"
             x1={0}
             y1={eventY[event.recId] + spacingY/2}
@@ -48,6 +49,7 @@ class matrice extends Component {
       return (
         <g>
           <line
+            key={'actor'+actor.recId}
             className="eventLine"
             x1={actorsX[actor.recId] + spacingX/2}
             y1={offsetY - spacingY/2}
@@ -70,6 +72,7 @@ class matrice extends Component {
       return (
         <g opacity={opacityScale(mentions.length)}>
           <rect
+          key={'cell'+actorsX[link.target].recId+'-'+eventY[link.source]}
           style={{fill:color}}
           x={actorsX[link.target] + 3}
           y={eventY[link.source] + 1} width={spacingX-6} height={spacingY-2}>
