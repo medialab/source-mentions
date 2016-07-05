@@ -40,6 +40,7 @@ class matrice extends Component {
       return <div>
         <h3>{(i > 0)|| title}</h3>
         <blockquote>{mention.relDescription}</blockquote>
+        <hr/>
       </div>;
 
     }
