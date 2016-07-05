@@ -10,6 +10,7 @@ class DataList extends Component {
         <div key={res.recId} className="row record">
           <div className="col-sm-1"> {res.recId}</div>
           <div className="col-sm-1"> {res.startDate}</div>
+          <div className="col-sm-1"> {res.mentions} by {res.mentionsBy}</div>
           <div className="col-sm-8"> {res.recTitle}</div>
         </div>
       )
