@@ -2,7 +2,7 @@
 node_modules/
 .kotatsu/
 data.json
-
+build/
 
 # Logs
 logs
