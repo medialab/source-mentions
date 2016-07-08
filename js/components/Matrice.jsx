@@ -87,7 +87,7 @@ class matrice extends Component {
       const mentions = _.filter(links,{target:link.target, source:link.source});
       const color = actorsColor[link.target];
 
-
+      if(_.isUndefined(eventY[link.source])) return '';
       return (
         <g opacity={opacityScale(mentions.length)}>
           <rect

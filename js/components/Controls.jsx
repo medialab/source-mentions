@@ -16,7 +16,7 @@ class Controls extends Component {
     return (<div id="controls">
 
       <div className="col-sm-6">
-        <h4>Schenghen mentions</h4>
+        <h4>Schengen mentions</h4>
       </div>
 
       <div className="col-sm-3">
