@@ -15,11 +15,8 @@ class Controls extends Component {
 
     return (<div id="controls">
 
-      <div className="col-sm-6">
         <h4>Schengen mentions</h4>
-      </div>
 
-      <div className="col-sm-3">
         <h6>Events mentioned at least {this.props.minMentions} times</h6>
         <ReactSliderNativeBootstrap
             value={this.props.minMentions}
@@ -28,9 +25,6 @@ class Controls extends Component {
             max={15}
             min={1}
             disabled="disabled" />
-      </div>
-
-      <div className="col-sm-3">
         <h6>Events mentioned at least by {this.props.minMentionsBy} actors</h6>
         <ReactSliderNativeBootstrap
             value={this.props.minMentionsBy}
@@ -39,7 +33,6 @@ class Controls extends Component {
             max={5}
             min={1}
             disabled="disabled" />
-      </div>
 
     </div>)
   }

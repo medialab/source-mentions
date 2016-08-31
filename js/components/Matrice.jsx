@@ -4,21 +4,36 @@ import d3 from 'd3';
 import _ from 'lodash';
 
 class matrice extends Component {
+  handleResize(e) {
+    // this.setState({windowHeight: window.innerHeight});
+    tree.set('height', window.innerHeight)
+  };
+
+  componentDidMount() {
+    window.addEventListener('resize', this.handleResize);
+  };
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
+  };
 
   handleClick(source, target, links) {
     const mentions = _.filter(links, {'source':source,'target':target});
     tree.set('selectedMentions', mentions);
   };
 
-
-
   render(){
 
     const color = d3.scale.category10();
-    const spacingX = 50, spacingY = 11, offsetY = 30;
-    const width = 700, height = (this.props.events.length + 2) * spacingY + offsetY ;
+    const width = 600, height = this.props.height-50;
+    const spacingX = 35,
+          spacingY = (height/this.props.events.length),
+          offsetY = 15,
+          cellMargin = 1;
 
     let eventY = {}, actorsX = {}, actorsColor = {};
+
+    console.log(this.props.events.length)
 
     this.props.events.forEach( (d, i) => {
       eventY[d.recId] = spacingY * i + offsetY;
@@ -29,9 +44,7 @@ class matrice extends Component {
       actorsColor[d.recId] = color(i);
     });
 
-
     const opacityScale = d3.scale.linear().domain([0,12]).range([0.2,1]);
-
 
     function mentionsInfos(mention, i){
 
@@ -47,7 +60,7 @@ class matrice extends Component {
 
     function eventLabels(event){
       return (
-        <g>
+        <g >
           <line
             key={'event'+event.recId}
             className="eventLine"
@@ -57,8 +70,12 @@ class matrice extends Component {
             y2={eventY[event.recId] + spacingY/2}
           ><title>{event.shortName}</title></line>
 
-          <text x={spacingX*5.5} y={eventY[event.recId] + 9}>
-            • {event.startDate} — {_.truncate(event.shortName, {'length': 140})}
+          <text
+            x={spacingX*5.5}
+            y={eventY[event.recId] + spacingY/2}
+            // style={{'font-size':spacingY+'px'}}
+          >
+            {event.startDate} — {_.truncate(event.shortName, {'length': 140})}
           </text>
         </g>
         )
@@ -71,11 +88,16 @@ class matrice extends Component {
             key={'actor'+actor.recId}
             className="eventLine"
             x1={actorsX[actor.recId] + spacingX/2}
-            y1={offsetY - spacingY/2}
+            y1={offsetY}
             x2={actorsX[actor.recId] + spacingX/2}
             y2={height}
-          ><title>{actor.recTitle}</title></line>
-          <text className="actors" x={actorsX[actor.recId] + spacingX/2} y={offsetY - spacingY/2}>
+          >
+            <title>{actor.recTitle}</title>
+          </line>
+          <text
+            className="actors"
+            x={actorsX[actor.recId] + spacingX/2}
+            y={offsetY}>
             {actor.recTitle}
           </text>
         </g>
@@ -91,22 +113,19 @@ class matrice extends Component {
       return (
         <g opacity={opacityScale(mentions.length)}>
           <rect
-          key={'cell'+actorsX[link.target].recId+'-'+eventY[link.source]}
-          style={{fill:color}}
-          x={actorsX[link.target] + 3}
-          y={eventY[link.source] + 1} width={spacingX-6} height={spacingY-2}
-          onClick={e => { handleClick(link.source, link.target, links) }}
-          recId={link.recId}
+            key={'cell'+actorsX[link.target].recId+'-'+eventY[link.source]}
+            style={{fill:color}}
+            x={actorsX[link.target]}
+            y={eventY[link.source]} width={spacingX-cellMargin} height={spacingY-cellMargin}
+            onClick={e => { handleClick(link.source, link.target, links) }}
+            recId={link.recId}
           >
             <title>{link.recTitle} ( {mentions.length} mentions )
-
-
               {mentions.map((mention,i) => '\n—\t '+(i+1)+'. '+mention.relDescription+'\n')}
-
             </title>
           </rect>
         </g>
-        )
+      )
     }
 
     return (
@@ -130,5 +149,6 @@ export default branch(matrice,{cursors:{
   events:'events',
   actors:'actors',
   links:['graph','links'],
-  selectedMentions:'selectedMentions'
+  selectedMentions:'selectedMentions',
+  height:'height'
 }})

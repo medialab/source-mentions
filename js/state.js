@@ -76,6 +76,7 @@ const tree = new Baobab({
 
   minMentions:1,
   minMentionsBy:1,
+  heigth: 600,
 
   actors: monkey({
     cursors: { nodes: ['graph', 'nodes'] },
@@ -111,6 +112,7 @@ const tree = new Baobab({
 
     }).groupBy('source').value()
   })
+
 })
 
 // console.log('linkBySource:', tree.get('linkBySource'));

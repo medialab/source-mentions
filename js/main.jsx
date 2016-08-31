@@ -14,16 +14,14 @@ import '!style!css!less!./../assets/less/style.less';
 class App extends Component {
   render(){
     return (
-      <div>
+      <div className="container-fluid">
 
-        <div className="container navbar-fixed-top" >
+        <div className="col-sm-2">
           <Controls/>
         </div>
 
-        <div id="vizContainer" className="container">
-          <div className="row matrice"><Matrice/></div>
-          <div className="row"><Streamgraph/></div>
-          <div className="row"><DataList/></div>
+        <div id="vizContainer" className="col-sm-10">
+          <Matrice/>
         </div>
 
       </div>
@@ -31,6 +29,10 @@ class App extends Component {
   }
 }
 
+/*
+  <div className="row"><Streamgraph/></div>
+  <div className="row"><DataList/></div>
+*/
 // attach tree to app : creates a new component : RootedApp
 const RootedApp = root(App,tree);
 
