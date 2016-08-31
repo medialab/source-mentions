@@ -2,21 +2,9 @@ import React, {Component} from 'react';
 import {branch} from 'baobab-react/higher-order';
 import d3 from 'd3';
 import _ from 'lodash';
+import measured from '@yomguithereal/react-utilities/measured';
 
 class matrice extends Component {
-  handleResize(e) {
-    // this.setState({windowHeight: window.innerHeight});
-    tree.set('height', window.innerHeight)
-  };
-
-  componentDidMount() {
-    window.addEventListener('resize', this.handleResize);
-  };
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize);
-  };
-
   handleClick(source, target, links) {
     const mentions = _.filter(links, {'source':source,'target':target});
     tree.set('selectedMentions', mentions);
@@ -25,9 +13,9 @@ class matrice extends Component {
   render(){
 
     const color = d3.scale.category10();
-    const width = 600, height = this.props.height-50;
+    const width = this.props.width, height = this.props.height;
     const spacingX = 35,
-          spacingY = (height/this.props.events.length),
+          spacingY = (this.props.height/this.props.events.length),
           offsetY = 15,
           cellMargin = 1;
 
@@ -129,7 +117,7 @@ class matrice extends Component {
     }
 
     return (
-      <div>
+      <div className="maticeBox">
         <div className="col-sm-8">
           <svg width={width} height={height} className="matrice">
             <g>{this.props.events.map(eventLabels)}</g>
@@ -145,10 +133,15 @@ class matrice extends Component {
   }
 }
 
-export default branch(matrice,{cursors:{
-  events:'events',
-  actors:'actors',
-  links:['graph','links'],
-  selectedMentions:'selectedMentions',
-  height:'height'
-}})
+export default measured({height: '100%', width: '100%'},
+  branch(matrice,
+    {
+      cursors:{
+        events:'events',
+        actors:'actors',
+        links:['graph','links'],
+        selectedMentions:'selectedMentions'
+      }
+    }
+  )
+)

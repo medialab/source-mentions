@@ -20,7 +20,8 @@
     "lodash": "^4.13.1",
     "react": "^15.1.0",
     "react-bootstrap-native-slider": "^2.0.0",
-    "react-dom": "^15.1.0"
+    "react-dom": "^15.1.0",
+    "@yomguithereal/react-utilities": "^1.1.1"
   },
   "devDependencies": {
     "babel-preset-react": "^6.5.0",
