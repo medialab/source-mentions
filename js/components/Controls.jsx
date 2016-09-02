@@ -10,10 +10,8 @@ class Controls extends Component {
   updateInputMentionBy(e) { tree.set('minMentionsBy',e.target.value) }
 
   render(){
-
-
-
-    return (<div id="controls">
+    return (
+      <div id="controls">
 
         <h4>Schengen mentions</h4>
 
@@ -25,6 +23,7 @@ class Controls extends Component {
             max={15}
             min={1}
             disabled="disabled" />
+
         <h6>Events mentioned at least by {this.props.minMentionsBy} actors</h6>
         <ReactSliderNativeBootstrap
             value={this.props.minMentionsBy}
@@ -33,8 +32,8 @@ class Controls extends Component {
             max={5}
             min={1}
             disabled="disabled" />
-
-    </div>)
+      </div>
+    )
   }
 }
 export default branch(Controls,{ cursors:

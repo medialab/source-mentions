@@ -75,8 +75,7 @@ const tree = new Baobab({
   graph: dataCleaner(customData.results),
 
   minMentions:1,
-  minMentionsBy:1,
-  heigth: 600,
+  minMentionsBy:2,
 
   actors: monkey({
     cursors: { nodes: ['graph', 'nodes'] },

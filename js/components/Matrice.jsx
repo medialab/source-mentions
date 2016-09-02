@@ -5,6 +5,7 @@ import _ from 'lodash';
 import measured from '@yomguithereal/react-utilities/measured';
 
 class matrice extends Component {
+
   handleClick(source, target, links) {
     const mentions = _.filter(links, {'source':source,'target':target});
     tree.set('selectedMentions', mentions);
@@ -20,8 +21,6 @@ class matrice extends Component {
           cellMargin = 1;
 
     let eventY = {}, actorsX = {}, actorsColor = {};
-
-    console.log(this.props.events.length)
 
     this.props.events.forEach( (d, i) => {
       eventY[d.recId] = spacingY * i + offsetY;
@@ -101,6 +100,7 @@ class matrice extends Component {
       return (
         <g opacity={opacityScale(mentions.length)}>
           <rect
+            className='cell'
             key={'cell'+actorsX[link.target].recId+'-'+eventY[link.source]}
             style={{fill:color}}
             x={actorsX[link.target]}
@@ -118,14 +118,14 @@ class matrice extends Component {
 
     return (
       <div className="maticeBox">
-        <div className="col-sm-8">
+        <div >
           <svg width={width} height={height} className="matrice">
             <g>{this.props.events.map(eventLabels)}</g>
             <g>{this.props.actors.map(actorsLabels)}</g>
             <g>{this.props.links.map(cell => cells(cell, this.props.links, this.handleClick))}</g>
           </svg>
         </div>
-        <div className="col-sm-4">
+        <div>
           {this.props.selectedMentions.map(mentionsInfos)}
         </div>
       </div>
@@ -133,15 +133,13 @@ class matrice extends Component {
   }
 }
 
-export default measured({height: '100%', width: '100%'},
-  branch(matrice,
-    {
-      cursors:{
+export default branch(
+    measured({width: '100%',height: '100%'}, matrice),
+    { cursors:{
         events:'events',
         actors:'actors',
         links:['graph','links'],
         selectedMentions:'selectedMentions'
-      }
-    }
+    }}
   )
-)
+
