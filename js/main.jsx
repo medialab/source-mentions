@@ -2,12 +2,9 @@ import React,{Component} from 'react';
 import {render} from 'react-dom';
 import {root} from 'baobab-react/higher-order';
 import tree from './state';
-import Counter from './components/Counter.jsx';
-import Report from './components/Report.jsx';
-import DataList from './components/DataList.jsx';
-import Streamgraph from './components/Streamgraph.jsx';
 import Matrice from './components/Matrice.jsx';
 import Controls from './components/Controls.jsx';
+import Focus from './components/Focus.jsx';
 
 import '!style!css!less!./../assets/less/style.less';
 
@@ -16,12 +13,16 @@ class App extends Component {
     return (
       <div className="container-fluid">
 
-        <div className="col-sm-2">
+        <div className="col-sm-1">
           <Controls/>
         </div>
 
-        <div id="vizContainer" className="col-sm-10">
+        <div id="vizContainer" className="col-sm-6">
           <Matrice/>
+        </div>
+
+        <div id="focus" className="col-sm-5">
+          <Focus/>
         </div>
 
       </div>
@@ -29,11 +30,6 @@ class App extends Component {
   }
 }
 
-/*
-  <div className="row"><Streamgraph/></div>
-  <div className="row"><DataList/></div>
-*/
-// attach tree to app : creates a new component : RootedApp
 const RootedApp = root(App,tree);
 
 var mountNode = document.getElementById('app');

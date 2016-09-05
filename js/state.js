@@ -92,7 +92,6 @@ const tree = new Baobab({
     get: curs => _(curs.nodes)
       .filter(['recTypeId', 20])
       .filter(event => {
-        // console.log(curs.minMentionsBy, event.mentionsBy)
         return event.mentions >= curs.minMentions && event.mentionsBy >= curs.minMentionsBy;
       })
       .value()
@@ -104,17 +103,11 @@ const tree = new Baobab({
   linkBySource: monkey({
     cursors: { links: ['graph','links'], nodes:['graph','nodes'] },
     get: d => _(d.links).filter(l => {
-
       var actors = _.filter(d.nodes, ['recTypeId', 10]);
-
       return _.includes(Sutils.getAll(actors, 'recId'), l.target)
-
     }).groupBy('source').value()
   })
 
 })
-
-// console.log('linkBySource:', tree.get('linkBySource'));
-// console.log('events:', tree.get('events'));
 
 export default tree;

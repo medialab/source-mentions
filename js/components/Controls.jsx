@@ -14,8 +14,8 @@ class Controls extends Component {
       <div id="controls">
 
         <h4>Schengen mentions</h4>
-
-        <h6>Events mentioned at least {this.props.minMentions} times</h6>
+        Events mentioned at least …
+        <h6>{this.props.minMentions} times</h6>
         <ReactSliderNativeBootstrap
             value={this.props.minMentions}
             handleChange={this.updateInputMention}
@@ -24,7 +24,7 @@ class Controls extends Component {
             min={1}
             disabled="disabled" />
 
-        <h6>Events mentioned at least by {this.props.minMentionsBy} actors</h6>
+        <h6>by {this.props.minMentionsBy} actors</h6>
         <ReactSliderNativeBootstrap
             value={this.props.minMentionsBy}
             handleChange={this.updateInputMentionBy}

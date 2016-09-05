@@ -5,31 +5,31 @@
   font-family: 'Heebo';
   font-style: normal;
   font-weight: 400;
-  src: url('../fonts/heebo-v2-latin/heebo-v2-latin-regular.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/heebo-v2-latin/heebo-v2-latin-regular.eot');
   src: local('Heebo'), local('Heebo-Regular'),
-       url('../fonts/heebo-v2-latin/heebo-v2-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('../fonts/heebo-v2-latin/heebo-v2-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
-       url('../fonts/heebo-v2-latin/heebo-v2-latin-regular.woff') format('woff'), /* Modern Browsers */
-       url('../fonts/heebo-v2-latin/heebo-v2-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('../fonts/heebo-v2-latin/heebo-v2-latin-regular.svg#Heebo') format('svg'); /* Legacy iOS */
+       url('../fonts/heebo-v2-latin/heebo-v2-latin-regular.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/heebo-v2-latin/heebo-v2-latin-regular.woff2') format('woff2'),
+       url('../fonts/heebo-v2-latin/heebo-v2-latin-regular.woff') format('woff'),
+       url('../fonts/heebo-v2-latin/heebo-v2-latin-regular.ttf') format('truetype'),
+       url('../fonts/heebo-v2-latin/heebo-v2-latin-regular.svg#Heebo') format('svg');
 }
 /* heebo-500 - latin */
 @font-face {
   font-family: 'Heebo';
   font-style: normal;
   font-weight: 500;
-  src: url('../fonts/heebo-v2-latin/heebo-v2-latin-500.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/heebo-v2-latin/heebo-v2-latin-500.eot');
   src: local('Heebo Medium'), local('Heebo-Medium'),
-       url('../fonts/heebo-v2-latin/heebo-v2-latin-500.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('../fonts/heebo-v2-latin/heebo-v2-latin-500.woff2') format('woff2'), /* Super Modern Browsers */
-       url('../fonts/heebo-v2-latin/heebo-v2-latin-500.woff') format('woff'), /* Modern Browsers */
-       url('../fonts/heebo-v2-latin/heebo-v2-latin-500.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('../fonts/heebo-v2-latin/heebo-v2-latin-500.svg#Heebo') format('svg'); /* Legacy iOS */
+       url('../fonts/heebo-v2-latin/heebo-v2-latin-500.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/heebo-v2-latin/heebo-v2-latin-500.woff2') format('woff2'),
+       url('../fonts/heebo-v2-latin/heebo-v2-latin-500.woff') format('woff'),
+       url('../fonts/heebo-v2-latin/heebo-v2-latin-500.ttf') format('truetype'),
+       url('../fonts/heebo-v2-latin/heebo-v2-latin-500.svg#Heebo') format('svg');
 }
 
 @color: royalblue;
 @font-size-base: 12px;
-@font-family-sans-serif:  'Heebo','Helvetica Neue', Helvetica, Arial, sans-serif;
+@font-family-sans-serif: 'Heebo','Helvetica Neue', Helvetica, Arial, sans-serif;
 
 .record {
   border-bottom: @color solid 1px;
@@ -42,7 +42,6 @@
 }
 
 .eventLine {
-  stroke-width:4px;
   stroke: darken(white, 10%);
   stroke-linecap:round;
 }
@@ -61,11 +60,15 @@
 }
 
 .maticeBox {
-  height: 90vh;
+  height: 98vh;
 }
 
 #controls {}
 #vizContainer {}
+#focus {
+  height: 98vh;
+  overflow-y: scroll;
+}
 
 blockquote {
   font-size: 12px;
