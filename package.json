@@ -12,16 +12,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@yomguithereal/react-utilities": "^1.2.3",
     "baobab": "^2.3.0",
     "baobab-react": "^1.0.1",
     "bootstrap": "^3.3.6",
+    "classnames": "^2.2.5",
     "d3": "^3.5.17",
     "d3-scale": "^0.7.2",
     "lodash": "^4.13.1",
     "react": "^15.1.0",
     "react-bootstrap-native-slider": "^2.0.0",
-    "react-dom": "^15.1.0",
-    "@yomguithereal/react-utilities": "^1.2.3"
+    "react-dom": "^15.1.0"
   },
   "devDependencies": {
     "babel-preset-react": "^6.5.0",

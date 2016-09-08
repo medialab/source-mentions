@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import classNames from 'classnames';
 import {branch} from 'baobab-react/higher-order';
 import d3 from 'd3';
 import _ from 'lodash';
@@ -8,7 +9,7 @@ class matrice extends Component {
 
   handleClick(source, target, links) {
     const mentions = _.filter(links, {'source':source,'target':target});
-    tree.set('selectedMentions', mentions);
+    tree.set('activeMentions', mentions);
   };
 
   render(){
@@ -38,17 +39,19 @@ class matrice extends Component {
 
     const opacityScale = d3.scale.linear().domain([0,12]).range([0.2,1]);
 
-    function eventLabels(event){
+    function eventLabels(event, handleClick){
       return (
         <g >
           <rect
-            className='cell'
+            classNames='cell'
             key={'event'+event.recId}
             style={{fill:'#EDEDED'}}
             x={offsetX}
             y={eventY[event.recId]}
             width={spacingX * actorsCount}
             height={spacingY-cellMargin}
+            onClick={e => { handleClick(0, 0, []) }}
+
           >
             <title>{event.shortName}</title>
           </rect>
@@ -83,26 +86,26 @@ class matrice extends Component {
       )
     }
 
-    function cells(link, links, handleClick, selectedMentions){
+    function cells(link, links, handleClick, activeMentions, activeEntityIds){
 
       const mentions = _.filter(links,{target:link.target, source:link.source});
+      const isConcerned = _.indexOf(activeEntityIds,link.source) != -1 || _.indexOf(activeEntityIds,link.target) != -1
+      const isActive = _.indexOf(activeEntityIds,link.source) != -1 && _.indexOf(activeEntityIds,link.target) != -1
       const color = actorsColor[link.target];
-
-      console.log(
-        _(selectedMentions)
-          .map(mention => { return [mention.source,mention.target]})
-          .flatten()
-          .value()
-      )
+      const opacity = isActive ? '1':opacityScale(mentions.length);
 
       if(_.isUndefined(eventY[link.source])) return '';
 
       return (
-        <g opacity={opacityScale(mentions.length)}>
+        <g>
           <rect
-            className='cell'
+            className={classNames({
+              'cell': true,
+              'active': isActive,
+              'concerned': isConcerned
+            })}
             key={'cell'+actorsX[link.target].recId+'-'+eventY[link.source]}
-            style={{fill:color}}
+            style={{fill:color, 'opacity':opacity}}
             x={actorsX[link.target]}
             y={eventY[link.source]}
             width={spacingX}
@@ -121,9 +124,15 @@ class matrice extends Component {
     return (
       <div className="maticeBox">
         <svg width={width} height={height} className="matrice">
-          <g>{this.props.events.map(eventLabels)}</g>
+          <g>{this.props.events.map(events => eventLabels(events, this.handleClick))}</g>
           <g>{this.props.actors.map(actorsLabels)}</g>
-          <g>{this.props.links.map(cell => cells(cell, this.props.links, this.handleClick, this.props.selectedMentions))}</g>
+          <g>{this.props.links.map(cell => cells(
+            cell,
+            this.props.links,
+            this.handleClick,
+            this.props.activeMentions,
+            this.props.activeEntityIds
+          ))}</g>
         </svg>
       </div>
     )
@@ -140,7 +149,8 @@ export default branch(
       events:'events',
       actors:'actors',
       links:['graph','links'],
-      selectedMentions:'selectedMentions'
+      activeMentions:'activeMentions',
+      activeEntityIds:'activeEntityIds'
     }
   }
 )

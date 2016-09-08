@@ -57,6 +57,21 @@
   .eventLine {
     stroke-width:1px;
   }
+
+  .cell {
+     transition: fill .4s ease;
+
+    &.active {
+      stroke:black;
+      stroke-width:5;
+    }
+
+    &.concerned {
+      stroke:black;
+      stroke-width:1;
+    }
+
+  }
 }
 
 .maticeBox {

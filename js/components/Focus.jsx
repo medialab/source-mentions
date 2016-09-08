@@ -18,10 +18,10 @@ class Message extends Component {
 
     return (
       <div>
-        {this.props.selectedMentions.map(mentionsInfos)}
+        {this.props.activeMentions.map(mentionsInfos)}
       </div>
     )
   }
 }
 
-export default branch(Message,{cursors:{selectedMentions:'selectedMentions'}})
+export default branch(Message,{cursors:{activeMentions:'activeMentions'}})

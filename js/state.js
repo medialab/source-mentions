@@ -81,7 +81,16 @@ const tree = new Baobab({
     cursors: { nodes: ['graph', 'nodes'] },
     get: d => filter(d.nodes, ['recTypeId', 10])
   }),
-  selectedMentions:[],
+  activeMentions:[],
+  activeEntityIds: monkey({
+    cursors: {
+      activeMentions:['activeMentions']
+    },
+    get: curs => _(curs.activeMentions)
+        .map(mention => {return [mention.source,mention.target]})
+        .flatten()
+        .value()
+  }),
   events: monkey({
     cursors: {
       nodes: ['graph', 'nodes'],
