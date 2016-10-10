@@ -2,8 +2,13 @@ import Baobab, {monkey} from 'baobab';
 import {filter} from 'lodash';
 import Sutils from './utils.js';
 
-const customData = require('./../data.json');
+const customData = require('./../data/data.json');
+var graphFile = require("file!./../data/liberty_and_security.gexf");
 
+// Asynchronously fetch the gexf file and parse it
+gexf.fetch(graphFile, function(graph) {
+  console.log(graph, customData);
+});
 
 function dataCleaner(data){
 
