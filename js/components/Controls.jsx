@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import {branch} from 'baobab-react/higher-order'
 import ReactSliderNativeBootstrap from 'react-bootstrap-native-slider'
-import * as actions from './../actions.js'
+import {toogleHelp} from './../actions.js';
 
 
 class Controls extends Component {
@@ -32,13 +32,23 @@ class Controls extends Component {
             max={5}
             min={1}
             disabled="disabled" />
+
+        <hr/>
+        <button
+          type="button"
+          class="btn btn-default"
+          data-dismiss="modal"
+          onClick={this.props.actions.toogleHelp}>
+          Help ?
+        </button>
       </div>
     )
   }
 }
-export default branch(Controls,{ cursors:
-  {
+export default branch(Controls,{
+  cursors:{
     minMentions:'minMentions',
     minMentionsBy:'minMentionsBy'
-  }
+  },
+  actions:{toogleHelp}
 })

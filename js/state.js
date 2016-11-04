@@ -78,7 +78,7 @@ function getLayers(d) {
 const tree = new Baobab({
   counter: 0,
   graph: dataCleaner(customData.results),
-
+  helpModal:true,
   minMentions:1,
   minMentionsBy:2,
 

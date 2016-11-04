@@ -5,26 +5,28 @@ import tree from './state'
 import Matrice from './components/Matrice.jsx'
 import Controls from './components/Controls.jsx'
 import Focus from './components/Focus.jsx'
+import Help from './components/Help.jsx'
 
 import '!style!css!less!./../assets/less/style.less'
 
 class App extends Component {
   render(){
     return (
-      <div className="container-fluid">
+      <div>
+        <div className="container-fluid">
+          <div className="col-sm-1">
+            <Controls />
+          </div>
 
-        <div className="col-sm-1">
-          <Controls/>
+          <div id="vizContainer" className="col-sm-6">
+            <Matrice />
+          </div>
+
+          <div id="focus" className="col-sm-5">
+            <Focus />
+          </div>
         </div>
-
-        <div id="vizContainer" className="col-sm-6">
-          <Matrice/>
-        </div>
-
-        <div id="focus" className="col-sm-5">
-          <Focus/>
-        </div>
-
+        <Help />
       </div>
     )
   }

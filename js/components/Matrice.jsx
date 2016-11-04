@@ -52,10 +52,9 @@ class matrice extends Component {
 
     function eventLabels(event, handleClick){
       return (
-        <g>
+        <g key={'event'+event.recId}>
           <rect
             classNames='cell'
-            key={'event'+event.recId}
             style={{fill:'#EDEDED'}}
             x={offsetX}
             y={eventY[event.recId]}
@@ -80,6 +79,7 @@ class matrice extends Component {
     function yearsLabels(event){
       return (
         <text
+          key={'yearLabel'+event.recId}
           x={0}
           y={eventY[event.recId] + spacingY/2}
           style={{'fontSize':fontSize+'px'}}
@@ -92,6 +92,7 @@ class matrice extends Component {
     function actorsLabels(actor, i){
       return (
         <text
+          key={'actor'+actor.recId}
           className="actors"
           x={actorsX[actor.recId] + spacingX/2}
           y={offsetY/2}>
