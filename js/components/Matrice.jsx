@@ -112,14 +112,13 @@ class matrice extends Component {
       if(_.isUndefined(eventY[link.source])) return ''
 
       return (
-        <g>
+        <g key={'cell'+link.target.recId+'-'+link.source.recId+'-'+link.recId}>
           <rect
             className={classNames({
               'cell': true,
               'active': isActive,
               'concerned': isConcerned
             })}
-            key={'cell'+actorsX[link.target].recId+'-'+eventY[link.source]}
             style={{fill:color, 'opacity':opacity}}
             x={actorsX[link.target]}
             y={eventY[link.source]}
