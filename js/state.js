@@ -3,12 +3,12 @@ import {filter} from 'lodash';
 import Sutils from './utils.js';
 
 const customData = require('./../data/data.json');
-var graphFile = require("file!./../data/liberty_and_security.gexf");
+// var graphFile = require("file!./../data/liberty_and_security.gexf");
 
-// Asynchronously fetch the gexf file and parse it
-gexf.fetch(graphFile, function(graph) {
-  console.log(graph, customData);
-});
+// // Asynchronously fetch the gexf file and parse it
+// gexf.fetch(graphFile, function(graph) {
+//   console.log(graph, customData);
+// });
 
 function dataCleaner(data){
 

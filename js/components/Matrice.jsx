@@ -3,9 +3,19 @@ import classNames from 'classnames';
 import {branch} from 'baobab-react/higher-order';
 import d3 from 'd3';
 import _ from 'lodash';
-import measured from '@yomguithereal/react-utilities/measured';
+import Measure from 'react-measure';
 
 class matrice extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      dimensions: {
+        width: -1,
+        height: -1
+      }
+    }
+  }
 
   handleClick(source, target, links) {
     const mentions = _.filter(links, {'source':source,'target':target});
@@ -13,14 +23,12 @@ class matrice extends Component {
   };
 
   render(){
-
+    const { width, height } = this.state.dimensions
     const color = d3.scale.category10(),
-          width = this.props.width,
-          height = this.props.height,
           spacingX = 30,
           offsetY = 30,
           offsetX = 50,
-          spacingY = (this.props.height-offsetY)/this.props.events.length,
+          spacingY = (height-offsetY)/this.props.events.length,
           cellMargin = 4,
           fontSizeMax = 12,
           actorsCount = this.props.actors.length,
@@ -122,28 +130,31 @@ class matrice extends Component {
     }
 
     return (
-      <div className="maticeBox">
-        <svg width={width} height={height} className="matrice">
-          <g>{this.props.events.map(events => eventLabels(events, this.handleClick))}</g>
-          <g>{this.props.actors.map(actorsLabels)}</g>
-          <g>{this.props.links.map(cell => cells(
-            cell,
-            this.props.links,
-            this.handleClick,
-            this.props.activeMentions,
-            this.props.activeEntityIds
-          ))}</g>
-        </svg>
-      </div>
+      <Measure
+        onMeasure={(dimensions) => {
+          this.setState({dimensions})
+        }}
+      >
+
+        <div className="maticeBox">
+          <svg width={width} height={height} className="matrice">
+            <g>{this.props.events.map(events => eventLabels(events, this.handleClick))}</g>
+            <g>{this.props.actors.map(actorsLabels)}</g>
+            <g>{this.props.links.map(cell => cells(
+              cell,
+              this.props.links,
+              this.handleClick,
+              this.props.activeMentions,
+              this.props.activeEntityIds
+            ))}</g>
+          </svg>
+        </div>
+      </Measure>
     )
   }
 }
 
-export default branch(
-  measured(
-    { width: '100%', height: '100%'},
-    matrice
-  ),
+export default branch(matrice,
   {
     cursors:{
       events:'events',
