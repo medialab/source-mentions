@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import classNames from 'classnames';
-import {branch} from 'baobab-react/higher-order';
-import d3 from 'd3';
-import _ from 'lodash';
-import Measure from 'react-measure';
+import React, {Component} from 'react'
+import classNames from 'classnames'
+import {branch} from 'baobab-react/higher-order'
+import d3 from 'd3'
+import _ from 'lodash'
+import Measure from 'react-measure'
 
 class matrice extends Component {
 
@@ -18,9 +18,9 @@ class matrice extends Component {
   }
 
   handleClick(source, target, links) {
-    const mentions = _.filter(links, {'source':source,'target':target});
-    tree.set('activeMentions', mentions);
-  };
+    const mentions = _.filter(links, {'source':source,'target':target})
+    tree.set('activeMentions', mentions)
+  }
 
   render(){
     const { width, height } = this.state.dimensions
@@ -32,20 +32,20 @@ class matrice extends Component {
           cellMargin = 4,
           fontSizeMax = 12,
           actorsCount = this.props.actors.length,
-          fontSize = Math.min(spacingY,fontSizeMax);
+          fontSize = Math.min(spacingY,fontSizeMax)
 
 
-    let eventY = {}, actorsX = {}, actorsColor = {};
+    let eventY = {}, actorsX = {}, actorsColor = {}
     this.props.events.forEach( (d, i) => {
-      eventY[d.recId] = spacingY * i + offsetY;
-    });
+      eventY[d.recId] = spacingY * i + offsetY
+    })
 
     this.props.actors.forEach( (d, i) => {
-      actorsX[d.recId] = spacingX * i + offsetX;
-      actorsColor[d.recId] = color(i);
-    });
+      actorsX[d.recId] = spacingX * i + offsetX
+      actorsColor[d.recId] = color(i)
+    })
 
-    const opacityScale = d3.scale.linear().domain([0,12]).range([0.2,1]);
+    const opacityScale = d3.scale.linear().domain([0,12]).range([0.2,1])
 
     function eventLabels(event, handleClick){
       return (
@@ -96,13 +96,13 @@ class matrice extends Component {
 
     function cells(link, links, handleClick, activeMentions, activeEntityIds){
 
-      const mentions = _.filter(links,{target:link.target, source:link.source});
+      const mentions = _.filter(links,{target:link.target, source:link.source})
       const isConcerned = _.indexOf(activeEntityIds,link.source) != -1 || _.indexOf(activeEntityIds,link.target) != -1
       const isActive = _.indexOf(activeEntityIds,link.source) != -1 && _.indexOf(activeEntityIds,link.target) != -1
-      const color = actorsColor[link.target];
-      const opacity = isActive ? '1':opacityScale(mentions.length);
+      const color = actorsColor[link.target]
+      const opacity = isActive ? '1':opacityScale(mentions.length)
 
-      if(_.isUndefined(eventY[link.source])) return '';
+      if(_.isUndefined(eventY[link.source])) return ''
 
       return (
         <g>

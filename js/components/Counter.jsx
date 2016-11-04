@@ -1,6 +1,6 @@
-import React,{Component} from 'react';
-import {branch} from 'baobab-react/higher-order';
-import {increment} from './../actions.js';
+import React,{Component} from 'react'
+import {branch} from 'baobab-react/higher-order'
+import {increment} from './../actions.js'
 
 class Counter extends Component {
 

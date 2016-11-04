@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
-import {branch} from 'baobab-react/higher-order';
-import d3 from 'd3';
-import _ from 'lodash';
+import React, {Component} from 'react'
+import {branch} from 'baobab-react/higher-order'
+import d3 from 'd3'
+import _ from 'lodash'
 
 class Streamgraph extends Component {
   render(){
 
-    const color = d3.scale.category10();
-    const width = 700, height = 250;
-    const offsetx = width/this.props.events.length, offsety = 40;
+    const color = d3.scale.category10()
+    const width = 700, height = 250
+    const offsetx = width/this.props.events.length, offsety = 40
 
 
     function renderLines(d,i){
@@ -24,12 +24,12 @@ class Streamgraph extends Component {
 
     }
     const stack = d3.layout.stack()
-      .values(function(d) { return d.values; });
+      .values(function(d) { return d.values })
 
     const area = d3.svg.area()
-      .x(function(d)  { return offsetx * (d.x); })
-      .y0(function(d) { return offsety * (d.y0); })
-      .y1(function(d) { return offsety * (d.y0 + d.y); });
+      .x(function(d)  { return offsetx * (d.x) })
+      .y0(function(d) { return offsety * (d.y0) })
+      .y1(function(d) { return offsety * (d.y0 + d.y) })
 
     function renderPath(d, i){
       return <path
@@ -41,7 +41,7 @@ class Streamgraph extends Component {
         </path>
     }
 
-    const stacked = stack(_.cloneDeep(this.props.layers));
+    const stacked = stack(_.cloneDeep(this.props.layers))
 
     return (
       <svg width={width} height={height} className="line-chart">

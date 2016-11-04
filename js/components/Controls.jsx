@@ -1,7 +1,7 @@
-import React,{Component} from 'react';
-import {branch} from 'baobab-react/higher-order';
-import ReactSliderNativeBootstrap from 'react-bootstrap-native-slider';
-import * as actions from './../actions.js';
+import React,{Component} from 'react'
+import {branch} from 'baobab-react/higher-order'
+import ReactSliderNativeBootstrap from 'react-bootstrap-native-slider'
+import * as actions from './../actions.js'
 
 
 class Controls extends Component {

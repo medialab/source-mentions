@@ -1,12 +1,12 @@
-import React,{Component} from 'react';
-import {render} from 'react-dom';
-import {root} from 'baobab-react/higher-order';
-import tree from './state';
-import Matrice from './components/Matrice.jsx';
-import Controls from './components/Controls.jsx';
-import Focus from './components/Focus.jsx';
+import React,{Component} from 'react'
+import {render} from 'react-dom'
+import {root} from 'baobab-react/higher-order'
+import tree from './state'
+import Matrice from './components/Matrice.jsx'
+import Controls from './components/Controls.jsx'
+import Focus from './components/Focus.jsx'
 
-import '!style!css!less!./../assets/less/style.less';
+import '!style!css!less!./../assets/less/style.less'
 
 class App extends Component {
   render(){
@@ -30,10 +30,10 @@ class App extends Component {
   }
 }
 
-const RootedApp = root(App,tree);
+const RootedApp = root(App,tree)
 
-var mountNode = document.getElementById('app');
-render(<RootedApp/>, mountNode);
+var mountNode = document.getElementById('app')
+render(<RootedApp/>, mountNode)
 
-module.exports = tree;
-window.tree = tree;
+module.exports = tree
+window.tree = tree

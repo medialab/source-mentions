@@ -1,18 +1,18 @@
-import React, {Component} from 'react';
-import {branch} from 'baobab-react/higher-order';
-import {scaleLinear} from 'd3-scale';
-import _ from 'lodash';
+import React, {Component} from 'react'
+import {branch} from 'baobab-react/higher-order'
+import {scaleLinear} from 'd3-scale'
+import _ from 'lodash'
 
 class Streamgraph extends Component {
   render(){
 
-    const events = this.props.events;
+    const events = this.props.events
     const minYear = _.minBy(events, 'startDate').startDate,
           maxYear = _.maxBy(events, 'startDate').startDate
 
     const x = scaleLinear()
       .domain([minYear, maxYear])
-      .range([0, 1000]);
+      .range([0, 1000])
 
     function renderItem(d,i) {
       return (

@@ -1,5 +1,5 @@
-import React,{Component} from 'react';
-import {branch} from 'baobab-react/higher-order';
+import React,{Component} from 'react'
+import {branch} from 'baobab-react/higher-order'
 
 class DataList extends Component {
   render(){
