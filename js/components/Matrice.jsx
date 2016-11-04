@@ -11,8 +11,8 @@ class matrice extends Component {
     super(props)
     this.state = {
       dimensions: {
-        width: -1,
-        height: -1
+        width: 500,
+        height: 500
       }
     }
   }
@@ -34,8 +34,11 @@ class matrice extends Component {
           actorsCount = this.props.actors.length,
           fontSize = Math.min(spacingY,fontSizeMax)
 
+    let eventY = {},
+        actorsX = {},
+        actorsColor = {},
+        yearsEventFirstEvent = _.sortedUniqBy(this.props.events,'startDate')
 
-    let eventY = {}, actorsX = {}, actorsColor = {}
     this.props.events.forEach( (d, i) => {
       eventY[d.recId] = spacingY * i + offsetY
     })
@@ -49,7 +52,7 @@ class matrice extends Component {
 
     function eventLabels(event, handleClick){
       return (
-        <g >
+        <g>
           <rect
             classNames='cell'
             key={'event'+event.recId}
@@ -59,7 +62,6 @@ class matrice extends Component {
             width={spacingX * actorsCount}
             height={spacingY-cellMargin}
             onClick={e => { handleClick(0, 0, []) }}
-
           >
             <title>{event.shortName}</title>
           </rect>
@@ -67,19 +69,23 @@ class matrice extends Component {
           <text
             x={spacingX*(actorsCount+0.5)+offsetX}
             y={eventY[event.recId] + spacingY/2}
-            style={{'font-size':fontSize+'px'}}
+            style={{'fontSize':fontSize+'px'}}
           >
             {_.truncate(event.shortName, {'length': 140})}
           </text>
-
-          <text
-            x={0}
-            y={eventY[event.recId] + spacingY/2}
-            style={{'font-size':fontSize+'px'}}
-          >
-            {event.startDate}
-          </text>
         </g>
+      )
+    }
+
+    function yearsLabels(event){
+      return (
+        <text
+          x={0}
+          y={eventY[event.recId] + spacingY/2}
+          style={{'fontSize':fontSize+'px'}}
+        >
+          {event.startDate}
+        </text>
       )
     }
 
@@ -135,10 +141,10 @@ class matrice extends Component {
           this.setState({dimensions})
         }}
       >
-
         <div className="maticeBox">
           <svg width={width} height={height} className="matrice">
-            <g>{this.props.events.map(events => eventLabels(events, this.handleClick))}</g>
+            <g>{this.props.events.map(event => eventLabels(event, this.handleClick))}</g>
+            <g>{yearsEventFirstEvent.map(event => yearsLabels(event) )}</g>
             <g>{this.props.actors.map(actorsLabels)}</g>
             <g>{this.props.links.map(cell => cells(
               cell,
