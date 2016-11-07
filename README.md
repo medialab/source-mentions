@@ -7,7 +7,7 @@ source project — analysing schenghen's events from actors mentions
 ### 1. Query the heurist database
 
 1. Connect to heurist instance using login and password.
-2. type the query in the search field : `type:1 field:6:5467 or t:10 or t:20`
+2. Type the query in the search field : `type:1 field:6:5467 or t:10 or t:20`
 
 About the query : 
 - `type:1 field:6:5467` to get **relationships** with **is mention by** as predicate (relationships `typeId` is `5467`)
@@ -26,18 +26,18 @@ About the query :
 
 1. `git clone git@github.com:medialab/source-mentions.git`
 2. `cd source-mentions/`
-3. add data in `./data/data.json`
+3. Copy JSON dump of the data in `./data/data.json`
 4. `npm i`
 5. `npm start` to lanch dev server powered by [Kotasu](https://github.com/Yomguithereal/kotatsu)
-6. the app is up at [`http://localhost:3000`](http://localhost:3000)
+6. The app is up at [`http://localhost:3000`](http://localhost:3000)
 
 ### 4. Build production app 
 
 1. `npm run build`
-2. the build version will be found in `./build`
+2. The build version will be found in `./build`
 
 ### 5. Host the app 
-- copy `./build` and `./index.html` to any webserver. 
+- Copy `./build` and `./index.html` to any webserver. 
 - Be aware the data is embed in the build.
 
 ## sketch
