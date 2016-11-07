@@ -1,6 +1,9 @@
 # source-mentions
 source project — analysing schenghen's events from actors mentions 
 
+![preview](preview.png?raw=true)
+
+
 ### 1. Query the heurist database
 Connect to heurist instance using login and password.
 
@@ -26,7 +29,7 @@ note : The data can be checked using the connection tab who displays the query r
 3. add data in `./data/data.json`
 4. `npm i`
 5. `npm start` to lanch dev server powered by [Kotasu](https://github.com/Yomguithereal/kotatsu)
-6. the app is up at [`http://localhost:3000`](./scripts/JSON-mentions.tpl )
+6. the app is up at [`http://localhost:3000`](http://localhost:3000)
 
 ### 4. Build production app 
 
