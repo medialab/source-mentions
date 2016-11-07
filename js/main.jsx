@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <div>
         <div className="container-fluid">
-          <div className="col-sm-1">
+          <div className="col-sm-2">
             <Controls />
           </div>
 
@@ -22,7 +22,7 @@ class App extends Component {
             <Matrice />
           </div>
 
-          <div id="focus" className="col-sm-5">
+          <div id="focus" className="col-sm-4">
             <Focus />
           </div>
         </div>
