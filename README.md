@@ -5,22 +5,22 @@ source project — analysing schenghen's events from actors mentions
 
 
 ### 1. Query the heurist database
-Connect to heurist instance using login and password.
 
-To get the data we need to ask for :
+1. Connect to heurist instance using login and password.
+2. type the query in the search field : `type:1 field:6:5467 or t:10 or t:20`
 
-- **relationships** with **is mention by** as predicate (`type:1 field:6:5467`)
-- **persons** and **events** (`t:10 or t:20`)
+About the query : 
+- `type:1 field:6:5467` to get **relationships** with **is mention by** as predicate (relationships `typeId` is `5467`)
+- `t:10 or t:20` to get **persons** and **events** nodes
 
-Complete query : `type:1 field:6:5467 or t:10 or t:20`
-
-note : The data can be checked using the connection tab who displays the query result as a network. A raw gexf can also be downloaded from there but the metadata form the relationships are missed during the export.
+*The data can be checked using the connection tab who displays the query result as a network. A raw gexf can also be downloaded from there but the metadata form the relationships are missed during the export.*
 
 ### 2. Export query as json 
 
 - From the **Report** tab select the `JSON-mentions` as template. 
-- The [template source code](./scripts/JSON-mentions.tpl ) can be edited to add new field to the report.
-- You can **copy paste** the result from the preview or use the **report publication** helper to get the url of the JSON file.
+- The [template source code](./scripts/JSON-mentions.tpl ) can be edited form heurist to add new data to the report.
+- You can **copy paste** the query result in JSON from the preview or use the **report publication** helper to get the direct url of the JSON file.
+- *If you want to access the data using AJAX from the JSON api-like url [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) should be configured on the server and data should be declared as public in heurist.*
 
 ### 3. Run dev server
 
