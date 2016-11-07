@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "kotatsu serve -c webpack.config.js --presets es2015,react,react-hmre --index ./index.html ./js/main.jsx",
-    "build": "kotatsu build -c webpack.config.js --presets es2015,react --index ./index.html  --minify client ./js/main.jsx -o build",
-    "update": "wget https://heurist.octopuce.fr/h4/viewers/smarty/showReps.php?db=liberty_and_security&w=a&q=%0Atype%3A1%20field%3A6%3Amentioned%20or%20t%3A10%20or%20t%3A20&h4=1&publish=1&debug=0&template=JSON-generic.tpl"
+    "build": "kotatsu build -c webpack.config.js --presets es2015,react --index ./index.html  --minify client ./js/main.jsx -o build"
   },
   "author": "",
   "license": "ISC",
