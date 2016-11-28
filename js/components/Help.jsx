@@ -13,17 +13,24 @@ class Message extends Component {
             <div className="help container">
 
               <div className="message col-sm-6">
-                <h1>Source Mention</h1>
-                <p>
-                Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.
-                </p>
-
+                <h1>Source Mentions</h1>
+                <hr/>
+                <h4>how to read ?</h4>
+                <p>A <strong>cell</strong> represents an event quoted by an actor, a <strong>column</strong> an actors narrative and <strong>rows</strong> the time.</p>
+                <p>On the <strong>horizontal</strong> axis you can explore ways of speaking about a <strong>specific event</strong>.
+                  On the <strong>vertical</strong> axis you can explore the whole story for a <strong>given actor</strong>.</p>
+                  <p>Click on the cells to see quotations about a specific event.</p>
+                <hr/>
+                <h4>Disclaimer</h4>
+                <p>‘This is a work in progress not a final version. Do not quote or circulate.If you have any questions or remarks please contact mederic.martin-maze@kcl.ac.uk</p>
+                <p>This visualisation was designed in the framework of the 'source' project by King's College London and SciencesPo Médialab.</p>
+                <hr/>
                 <button
                   type="button"
                   class="btn btn-default"
                   data-dismiss="modal"
                   onClick={this.props.actions.toogleHelp}>
-                  Close
+                  Close this window
                 </button>
               </div>
             </div>

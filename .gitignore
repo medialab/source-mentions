@@ -3,6 +3,7 @@ node_modules/
 .kotatsu/
 data/
 build/
+deploy.sh
 
 # Logs
 logs
