@@ -4,6 +4,8 @@ node_modules/
 data/
 build/
 deploy.sh
+.htaccess
+.htpasswd
 
 # Logs
 logs
