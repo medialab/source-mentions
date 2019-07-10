@@ -17,6 +17,7 @@
     "classnames": "^2.2.5",
     "d3": "^3.5.17",
     "d3-scale": "^0.7.2",
+    "jquery": "^2.2.4",
     "lodash": "^4.13.1",
     "react": "^15.1.0",
     "react-bootstrap-native-slider": "^2.0.0",
